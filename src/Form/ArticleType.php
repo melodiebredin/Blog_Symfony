@@ -28,7 +28,7 @@ class ArticleType extends AbstractType
             'label' => 'Soustitre',
             'required' => true,
             'attr' => ['placeholder' => 'Entrez un soustitre'],
-            'contraints' =>[
+            'constraints' =>[
                 new NotBlank([
                     'message'=>'Ce champ ne peut être vide'
                 ]),

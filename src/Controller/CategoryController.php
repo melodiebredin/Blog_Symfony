@@ -14,18 +14,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategoryController extends AbstractController
 {
 
-/**
- * @Route("/admin/creer-categorie", name="create_category", methods={"GET|POST"})
- */
-public function createCategory(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager){
+    /**
+     * @Route("/admin/creer-categorie", name="create_category", methods={"GET|POST"})
+     */
+    public function createCategory(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager)
+    {
 
-$category = new Category();
-$form = $this->createForm(CategoryType::class, $category)->handleRequest($request);
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category)->handleRequest($request);
 
-return $this->render('dashboard/form_category.html.twig', [
-    'form' => $form->createView()
-]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category = $form->getData();
 
+            $category->setAlias($slugger->slug($category->getName()));
+
+            $entityManager->persist($category);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'La catégorie est bien créee');
+            return $this->redirectToRoute('dashboard');
+        }
+        return $this->render('dashboard/form_category.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
 
-}
+
