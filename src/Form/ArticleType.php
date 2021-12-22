@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Image;
@@ -34,7 +36,7 @@ class ArticleType extends AbstractType
                 ]),
                 new Length([
                     'min'=>3,
-                    'max'=> 100,
+                    'max'=> 250,
                     'minMessage'=>'Le sous-titre doit comporter {{limit}} caractères au minimum.'
 
                 ])
@@ -45,6 +47,12 @@ class ArticleType extends AbstractType
             'label' => 'Description',
             'required' => true,
             'attr' => ['placeholder' => 'Entrez unse description']
+        ])
+
+        ->add('category', EntityType::class, [
+            'class' => Category::class,
+            'choice_label' => 'name',
+            'label' => 'choisissez la categorie de larticle'
         ])
         ->add('picture',FileType::class, [
             'label' => 'Photo',

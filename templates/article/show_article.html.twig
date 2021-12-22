@@ -13,9 +13,9 @@
                     <p class="h4 text-center mb-3 text-secondary">{{article.subtitle}}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item text-center text-muted">Crée le : {{ article.createdAt | date('m/d/Y') }} | Par : </li>
+                    <li class="list-group-item text-center text-muted">Crée le : {{ article.createdAt | date('d/m/Y') }} | Par : </li>
                 </ul>
-                <img class="img-custom" src="" alt="{{ article.title }}">
+                <img class="img-custom" src="{{asset ('uploads/' ~ article.picture)}}" alt="{{ article.title }}">
                 <div class="card-body">
                     <p class="card-text my-4 col-10 mx-auto">{{article.description}}</p>
                 </div>

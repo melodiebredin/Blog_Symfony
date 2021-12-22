@@ -54,7 +54,7 @@
                         <td title="{{article.description}}">
                             {{article.description | length > 40 ? article.description|slice(0, 40) ~ '...' : article.description}}
                         </td>
-                        <td><img style="width:100px;" src="{{article.picture}}" alt=""></td>
+                        <td><img style="width:100px;" src="{{ asset('uploads/' ~ article.picture) }}" alt=""></td>
                         <td>
                             <a href="{{path('delete_article',{'id': article.id })}}" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"><i class="fa fa-trash"></i></a> | <a href="{{path('edit_article',{'id': article.id })}}"><i class="fa fa-edit"></i></a>
                         </td>
